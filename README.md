@@ -1,7 +1,9 @@
 # Moonstone
 A cipher based on XOR cipher. <br>
-Which using key, last number and length of data to decrypt the data. <br>
-Still recommended to use another cipher such as AES, RSA etc. <br>
+Which uses key, last number and length of data to decrypt the data. <br>
+It's recommended to use other strong cipher like AES, RSA, RC4 etc. <br>
+WARNING!
+This tool might result some unicode characters which can possibly corrupt the stdout, so It's better to use cipher on files(You can make a .txt file).
 
 # How to use?
 **Cipher** <br>
