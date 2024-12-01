@@ -7,7 +7,7 @@ This tool might result some unicode characters which can possibly corrupt the st
 
 # How to use?
 **Cipher** <br>
-```
+```cpp
 moonstone_cipher(tchr* dest, tchr* key, uint64_t* last_randnum, uint64_t* last_len)
 dest = point to array contain a plain text.
 key = point to array contain a key.
@@ -16,7 +16,7 @@ last_len = point to uint64_t variable that will receive length of data.
 ```
 
 **Decipher** <br>
-```
+```cpp
 moonstone_decipher(tchr* dest, tchr* key, uint64_t last_randnum, uint64_t last_len)
 dest = point to array contain a cipher text.
 key = point to array contain a key.
