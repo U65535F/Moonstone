@@ -9,20 +9,22 @@ This tool might result some unicode characters which can possibly corrupt the st
 **Cipher** <br>
 ```cpp
 moonstone_cipher(tchr* dest, tchr* key, uint64_t* last_randnum, uint64_t* last_len)
-dest = point to array contain a plain text.
-key = point to array contain a key.
-last_randnum = point to uint64_t variable that will receive last number.
-last_len = point to uint64_t variable that will receive length of data.
 ```
+Parameters:
+`dest` = point to array contain a plain text.
+`key` = point to array contain a key.
+`last_randnum` = point to uint64_t variable that will receive last number.
+`last_len` = point to uint64_t variable that will receive length of data.
 
 **Decipher** <br>
 ```cpp
 moonstone_decipher(tchr* dest, tchr* key, uint64_t last_randnum, uint64_t last_len)
-dest = point to array contain a cipher text.
-key = point to array contain a key.
-last_randnum = point to uint64_t variable that will used in decipher process.
-last_len = point to uint64_t variable that will used in decipher process.
 ```
+Parameters:
+`dest` = point to array contain a cipher text.
+`key` = point to array contain a key.
+`last_randnum` = point to uint64_t variable that will used in decipher process.
+`last_len` = point to uint64_t variable that will used in decipher process.
 
 # Result
 The result of ciphered text are different each sequence. <br>
