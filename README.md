@@ -48,4 +48,4 @@ Decrypted =NGC 1300 is a barred spiral galaxy located about 61 million light-yea
 ```
 
 # Credits 
-This code is not written by me, instead It's written by okkiii. This is just an archive of code.
+This code is not written by me, instead It's written by some unknown person on the Internet. This is just an archive of code.
