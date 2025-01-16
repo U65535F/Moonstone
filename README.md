@@ -1,7 +1,8 @@
 # Moonstone
 A cipher based on XOR cipher. <br>
 It uses key, last number and length of data to decrypt the data. <br>
-Try to avoid this cipher in applications where security in crucial, It's recommended to use other strong cipher like AES, ChaCha, RSA, etc. <br>
+Try to avoid this cipher in applications where security is crucial, It's recommended to use other strong cipher like AES, ChaCha, RSA, etc. <br>
+Use this cipher for educational purposes and in small non-commericial applications.
 
 WARNING!
 This tool might result some unicode characters which can possibly corrupt the stdout, so It's save the output in files instead of printing it to console. 
