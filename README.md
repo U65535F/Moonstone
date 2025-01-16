@@ -1,9 +1,10 @@
 # Moonstone
 A cipher based on XOR cipher. <br>
-Which uses key, last number and length of data to decrypt the data. <br>
-It's recommended to use other strong cipher like AES, RSA, RC4 etc. <br>
+It uses key, last number and length of data to decrypt the data. <br>
+Try to avoid this cipher in applications where security in crucial, It's recommended to use other strong cipher like AES, ChaCha, RSA, etc. <br>
+
 WARNING!
-This tool might result some unicode characters which can possibly corrupt the stdout, so It's better to use cipher on files(You can make a .txt file).
+This tool might result some unicode characters which can possibly corrupt the stdout, so It's save the output in files instead of printing it to console. 
 
 # How to use?
 **Cipher** <br>
@@ -50,4 +51,4 @@ Decrypted =NGC 1300 is a barred spiral galaxy located about 61 million light-yea
 ```
 
 # Credits 
-This code is not written by me, instead It's written by some unknown person on the Internet. This is just an archive of code.
+This code is written by some unknown person and not me. This is just an archive of code.
