@@ -9,14 +9,14 @@ Use this cipher for educational purposes and in small non-commericial applicatio
 ```cpp
 int MoonstoneCipher(wchar_t* plainText, wchar_t* key, uint64_t* outSeed, uint64_t* outLength, wchar_t* cipherText)
 ```
-Parameters:
+Parameters: <br>
 `plainText` = Unicode array which needs to be encrypted. <br>
 `key` = Unicode array which contains the key. <br>
 `outSeed` = Pointer to `uint64_t` variable that will receive the seed. <br>
 `outLength` = Pointer to `uint64_t` variable that will receive length of data. <br>
 `cipherText` = Pointer to the unicode array which will receive the encrypted data. If this is 0 then the encrypted data will be written to the `plainText` buffer from parameter. 
 
-Return:
+Return: <br>
 `0` = failure <br>
 `1` = success
 
@@ -24,14 +24,14 @@ Return:
 ```cpp
 int MoonstoneDecipher(wchar_t* cipherText, wchar_t* key, uint64_t seedValue, uint64_t textLength, wchar_t* plainText)
 ```
-Parameters:
+Parameters: <br>
 `cipherText` = Unicode array which needs to be decrypted. <br>
 `key` = Unicode array which contains the key. <br>
 `seedValue` = Seed received by the `MoonstoneCipher` for decryption. <br>
 `textLength` = `outLength` received by the `MoonstoneCipher` for decryption. <br>
 `plainText` = Pointer to the unicode array which will receive the decrypted data. If this is 0 then the decrypted data will be written to the `cipherText` buffer from parameter. 
 
-Return:
+Return: <br>
 `0` = failure <br>
 `1` = success
 
@@ -53,4 +53,4 @@ The decrypted data does match with original data.
 ```
 
 # Credits
-Special thanks to Nathan (@snowballlearth, 🇮🇩) for writing base of Moonstone. This is the improved version of it. The original code is preserved at [this branch]([Branch Name](/tree/original).
+Special thanks to Nathan ([@snowballlearth](https://github.com/snowballearth), 🇮🇩) for writing base of Moonstone. This is the improved version of it. The original code is preserved at [this branch](/tree/original).
