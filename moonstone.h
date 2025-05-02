@@ -3,15 +3,12 @@
 #endif
 
 #include <stdint.h>
-#include <stdbool.h>
 #include <time.h>
+#include <wchar.h>
 
-#include "tchar.h"
-
+// SplitMix64 pseudo random number generator (PRNG)
 static uint64_t state = 0;
-
 static void seed(uint64_t _seed) { state = _seed; }
-
 static inline uint64_t sm64()
 {
     uint64_t z = (state += 0x9E3779B97F4A7C15);
@@ -20,43 +17,51 @@ static inline uint64_t sm64()
     return z ^ (z >> 31);
 }
 
-bool moonstone_cipher(TCHAR* dest, TCHAR* key, uint64_t* last_randnum, uint64_t* last_len)
+int MoonstoneCipher(wchar_t* plainText, wchar_t* key, uint64_t* outSeed, uint64_t* outLength, wchar_t* cipherText)
 {
-    uint64_t len_dest = _tcslen(dest);
-    uint64_t len_key = _tcslen(key); 
-    if (len_dest == 0 || len_key == 0) {return 0;}
+    uint64_t textLength = wcslen(plainText);
+    uint64_t keyLength = wcslen(key);
+    if (textLength == 0 || keyLength == 0) 
+        return 0;
     
     seed((uint64_t)time(0));
-    uint64_t temp_randnum = sm64();
-    uint64_t randnum = temp_randnum % len_key;
-    if (randnum == 0) {randnum++;}
-    
-    uint64_t key_index = randnum;
-    for (uint64_t i = 0; i < len_dest; i++)
-    {
-        key_index &= (randnum ^ i);
-        key_index |= len_dest;
-        dest[i] ^= key[((key_index ^ i) & len_dest) % randnum];
+    uint64_t seedValue = sm64();
+    uint64_t reducedSeed = seedValue % keyLength;
+    if (reducedSeed == 0)
+        reducedSeed++;
+
+    uint64_t mixValue = reducedSeed;
+
+    wchar_t* output = cipherText ? cipherText : plainText;
+    for (uint64_t i = 0; i < textLength; i++) {
+        mixValue &= (reducedSeed ^ i);
+        mixValue |= textLength;
+        output[i] = plainText[i] ^ key[((mixValue ^ i) & textLength) % reducedSeed];
     }
-    
-    *last_randnum = temp_randnum;
-    *last_len = len_dest;
+
+    *outSeed = seedValue;
+    *outLength = textLength;
     return 1;
 }
 
-bool moonstone_decipher(TCHAR* dest, TCHAR* key, uint64_t last_randnum, uint64_t last_len)
+int MoonstoneDecipher(wchar_t* cipherText, wchar_t* key, uint64_t seedValue, uint64_t textLength, wchar_t* plainText)
 {
-    if (last_randnum == 0 || last_len == 0) {return 0;}
-    uint64_t len_key = _tcslen(key);
-    uint64_t randnum = last_randnum % len_key;
-    if (randnum == 0) {randnum++;}
+    if (seedValue == 0 || textLength == 0) 
+        return 0;
     
-    uint64_t key_index = last_randnum;
-    for (uint64_t i = 0; i < last_len; i++)
-    {
-        key_index &= (randnum ^ i);
-        key_index |= last_len;
-        dest[i] ^= key[((key_index ^ i) & last_len) % randnum];
+    uint64_t keyLength = wcslen(key);
+    uint64_t reducedSeed = seedValue % keyLength;
+    if (reducedSeed == 0) 
+        reducedSeed++;
+
+    uint64_t mixValue = seedValue;
+    wchar_t* output = plainText ? plainText : cipherText;
+
+    for (uint64_t i = 0; i < textLength; i++) {
+        mixValue &= (reducedSeed ^ i);
+        mixValue |= textLength;
+        output[i] = cipherText[i] ^ key[((mixValue ^ i) & textLength) % reducedSeed];
     }
+
     return 1;
 }
