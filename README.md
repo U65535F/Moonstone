@@ -53,4 +53,4 @@ The decrypted data does match with original data.
 ```
 
 # Credits
-Special thanks to Nathan ([@snowballlearth](https://github.com/snowballearth), 🇮🇩) for writing base of Moonstone. This is the improved version of it. The original code is preserved at [this branch](/tree/original).
+Special thanks to Nathan ([@snowballlearth](https://github.com/snowballearth), 🇮🇩) for writing base of Moonstone. This is the improved version of it. The original code is preserved at `original` branch of this repository.
