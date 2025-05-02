@@ -1,55 +1,56 @@
 # Moonstone
 A cipher based on XOR cipher. <br>
-It uses key, last number and length of data to decrypt the data. <br>
+It uses key, seed and length of data to decrypt the data. <br>
 Try to avoid this cipher in applications where security is crucial, It's recommended to use other strong cipher like AES, ChaCha, RSA, etc. <br>
 Use this cipher for educational purposes and in small non-commericial applications.
-
-WARNING!
-This tool might result some unicode characters which can possibly corrupt the stdout, so It's save the output in files instead of printing it to console. 
 
 # How to use?
 **Cipher** <br>
 ```cpp
-moonstone_cipher(tchr* dest, tchr* key, uint64_t* last_randnum, uint64_t* last_len)
+int MoonstoneCipher(wchar_t* plainText, wchar_t* key, uint64_t* outSeed, uint64_t* outLength, wchar_t* cipherText)
 ```
 Parameters:
-`dest` = point to array contain a plain text.
-`key` = point to array contain a key.
-`last_randnum` = point to uint64_t variable that will receive last number.
-`last_len` = point to uint64_t variable that will receive length of data.
+`plainText` = Unicode array which needs to be encrypted. <br>
+`key` = Unicode array which contains the key. <br>
+`outSeed` = Pointer to `uint64_t` variable that will receive the seed. <br>
+`outLength` = Pointer to `uint64_t` variable that will receive length of data. <br>
+`cipherText` = Pointer to the unicode array which will receive the encrypted data. If this is 0 then the encrypted data will be written to the `plainText` buffer from parameter. 
+
+Return:
+`0` = failure <br>
+`1` = success
 
 **Decipher** <br>
 ```cpp
-moonstone_decipher(tchr* dest, tchr* key, uint64_t last_randnum, uint64_t last_len)
+int MoonstoneDecipher(wchar_t* cipherText, wchar_t* key, uint64_t seedValue, uint64_t textLength, wchar_t* plainText)
 ```
 Parameters:
-`dest` = point to array contain a cipher text.
-`key` = point to array contain a key.
-`last_randnum` = point to uint64_t variable that will used in decipher process.
-`last_len` = point to uint64_t variable that will used in decipher process.
+`cipherText` = Unicode array which needs to be decrypted. <br>
+`key` = Unicode array which contains the key. <br>
+`seedValue` = Seed received by the `MoonstoneCipher` for decryption. <br>
+`textLength` = `outLength` received by the `MoonstoneCipher` for decryption. <br>
+`plainText` = Pointer to the unicode array which will receive the decrypted data. If this is 0 then the decrypted data will be written to the `cipherText` buffer from parameter. 
+
+Return:
+`0` = failure <br>
+`1` = success
 
 # Result
 The result of ciphered text are different each sequence. <br>
 Sequence 1:
 ```
-Encrypted =>73Ps: sVHAR_M	32v7xnix$ %%	F]	WDE2$2*VVGGV__M(#%xv$P?94910i FSAA@\?:4;[G	@@MJ:0v%
-P7>x,!,i
-
-S$
-PPccczXV?GG	H
-^QVAPPM/78#%P3+,=*ei(i
-S<5saFFV
-FzGP	32v4	P:06x,;:*
-FSBlgaz
-
-Decrypted =NGC 1300 is a barred spiral galaxy located about 61 million light-years away in the constellation Eridanus. The galaxy is about 110,000 light-years across (about the half size of the Milky Way at 200,000). It is a member of the Eridanus Cluster, a cluster of 200 galaxies. It was discovered by John Herschel in 1835.
+Original:  This is my original text that needs to be encrypted.
+Encrypted (hex): 002d 0011 0010 000a 006d 0024 003e 006d 0014 0000 0059 0016 003f 0024 002a 0024 0023 002c 0021 006d 0027 0036 002b 0027 006d 0039 0025 002c 0027 0073 003d 0036 0036 0037 0020 0073 000d 0016 0059 001b 0036 0073 0036 003d 001a 000b 0000 0009 000d 001c 001d 0057
+Decrypted: This is my original text that needs to be encrypted.
+The decrypted data does match with original data.
 ```
 Sequence 2:
 ```
-Encrypted ==40S\^]]PJ6w56P
-
-Decrypted =NGC 1300 is a barred spiral galaxy located about 61 million light-years away in the constellation Eridanus. The galaxy is about 110,000 light-years across (about the half size of the Milky Way at 200,000). It is a member of the Eridanus Cluster, a cluster of 200 galaxies. It was discovered by John Herschel in 1835.
+Original:  This is my original text that needs to be encrypted.
+Encrypted (hex): 0019 0025 0024 003e 006d 0024 003e 006d 0020 0034 006d 0022 003f 0024 002a 0024 0023 002c 0021 006d 0039 0028 0035 0039 006d 0039 0025 002c 0039 006d 0023 0028 0028 0029 003e 006d 0039 0022 006d 002f 0028 006d 0028 0023 002e 003f 0034 003d 0039 0028 0029 0063
+Decrypted: This is my original text that needs to be encrypted.
+The decrypted data does match with original data.
 ```
 
-# Credits 
-This code is written by some unknown person and not me. This is just an archive of code.
+# Credits
+Special thanks to Nathan (@snowballlearth, 🇮🇩) for writing base of Moonstone. This is the improved version of it. The original code is preserved at [this branch]([Branch Name](/tree/original).
